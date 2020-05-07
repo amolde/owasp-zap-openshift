@@ -26,7 +26,7 @@ ADD zap /zap/
 #RUN mkdir -p /var/lib/jenkins/.vnc
 
 # Copy the entrypoint
-#COPY configuration/* /var/lib/jenkins/
+COPY configuration/* /var/lib/jenkins/
 COPY configuration/run-jnlp-client /usr/local/bin/run-jnlp-client
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
