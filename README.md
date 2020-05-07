@@ -12,7 +12,7 @@ image, so look at the Wiki page [HERE](https://github.com/zaproxy/zaproxy/wiki/D
 
 ## Deploying In OpenShift
 ```bash
-oc new-build -l 'role=jenkins-slave' https://github.com/rht-labs/owasp-zap-openshift.git
+oc new-build -l 'role=jenkins-slave' https://github.com/amolde/owasp-zap-openshift.git
 ```
 
 ## Configuring In OpenShift Jenkins

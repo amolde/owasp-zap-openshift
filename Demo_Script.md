@@ -13,13 +13,13 @@ You can add applications to this project with the 'new-app' command. For example
 
 to build a new example application in Ruby.
 ```
-3. Deploy the image to OpenShift: `oc new-build https://github.com/rht-labs/owasp-zap-openshift.git`
+3. Deploy the image to OpenShift: `oc new-build https://github.com/amolde/owasp-zap-openshift.git`
 ```
-$ oc new-build https://github.com/rht-labs/owasp-zap-openshift.git
+$ oc new-build https://github.com/amolde/owasp-zap-openshift.git
 --> Found Docker image 36540f3 (4 weeks old) from Docker Hub for "centos:centos7"
 
     * An image stream will be created as "centos:centos7" that will track the source image
-    * A Docker build using source code from https://github.com/rht-labs/owasp-zap-openshift.git will be created
+    * A Docker build using source code from https://github.com/amolde/owasp-zap-openshift.git will be created
       * The resulting image will be pushed to image stream "owasp-zap-openshift:latest"
       * Every time "centos:centos7" changes a new build will be triggered
 
