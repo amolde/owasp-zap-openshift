@@ -1,16 +1,10 @@
 # This dockerfile builds the zap stable release
+FROM centos:centos7
+MAINTAINER Deven Phillips <deven.phillips@redhat.com>
 
-FROM registry.access.redhat.com/rhel7
-
-MAINTAINER Dan Hawker <dhawker@redhat.com>
-
-RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-# Need to enable the RHEL extras subs
-RUN yum-config-manager --enable rhel-7-server-rpms rhel-7-server-extras-rpms rhel-7-server-optional-rpms epel > /dev/null
-
-RUN yum install --enablerepo=rhel-7-server-rpms --enablerepo=rhel-7-server-extras-rpms \
-    --enablerepo=rhel-7-server-optional-rpms --enablerepo=epel \
-    -y redhat-rpm-config \
+RUN yum install -y epel-release && \
+    yum clean all
+RUN yum install -y redhat-rpm-config \
     make automake autoconf gcc gcc-c++ \
     libstdc++ libstdc++-devel \
     java-1.8.0-openjdk wget curl \
@@ -46,13 +40,14 @@ ENV ZAP_PORT 8080
 #COPY policies /var/lib/jenkins/.ZAP/policies/
 COPY policies /zap/.ZAP/policies/
 #COPY .xinitrc /var/lib/jenkins/
+COPY scripts /zap/.ZAP_D/scripts/
 
 WORKDIR /zap
-# Download and expand the latest stable release
-RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml | xmlstarlet sel -t -v //url |grep -i Linux | wget -q --content-disposition -i - -O - | tar zx --strip-components=1 && \
-    curl -s -L https://bitbucket.org/meszarv/webswing/downloads/webswing-2.3-distribution.zip | jar -x && \
+# Download and expand the latest stable release 
+RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml | xmlstarlet sel -t -v //url |grep -i Linux | wget -q --content-disposition -i - -O - | tar zx --strip-components=1 && \
+    curl -s -L https://bitbucket.org/meszarv/webswing/downloads/webswing-2.5.10-distribution.zip | jar -x && \
     touch AcceptedLicense
-ADD webswing.config /zap/webswing-2.3/webswing.config
+ADD webswing.config /zap/webswing/webswing.config
 
 RUN chown root:root /zap -R && \
 #    chown root:root -R /var/lib/jenkins && \

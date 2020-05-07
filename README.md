@@ -29,7 +29,7 @@ oc new-build -l 'role=jenkins-slave' https://github.com/rht-labs/owasp-zap-opens
 ```groovy
 
 stage('Get a ZAP Pod') {
-    node('zap') {
+    node('owasp-zap-openshift') {
         stage('Scan Web Application') {
             dir('/zap') {
                 def retVal = sh returnStatus: true, script: '/zap/zap-baseline.py -r baseline.html -t http://<some-web-site>'
