@@ -27,7 +27,7 @@ ADD zap /zap/
 
 # Copy the entrypoint
 #COPY configuration/* /var/lib/jenkins/
-#COPY configuration/run-jnlp-client /usr/local/bin/run-jnlp-client
+COPY configuration/run-jnlp-client /usr/local/bin/run-jnlp-client
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 ENV PATH $JAVA_HOME/bin:/zap:$PATH
