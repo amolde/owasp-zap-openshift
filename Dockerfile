@@ -59,6 +59,6 @@ WORKDIR /zap
 RUN pwd && ls -la
 
 # Run the Jenkins JNLP client
-#ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]
-ENTRYPOINT ["/zap/zap.sh", "-dir", "/zap/.ZAP", "-daemon", "-host", "0.0.0.0", "-port", "9090", "-config", "api.disablekey=true"]
-#CMD ["-dir", "/zap/.ZAP", "-daemon", "-host", "0.0.0.0", "-port", "8080"]
+ENTRYPOINT ["/usr/local/bin/run-jnlp-client"]
+# ENTRYPOINT ["/zap/zap.sh", "-dir", "/zap/.ZAP", "-daemon", "-host", "0.0.0.0", "-port", "9090", "-config", "api.disablekey=true"]
+# CMD ["-dir", "/zap/.ZAP", "-daemon", "-host", "0.0.0.0", "-port", "8080"]
