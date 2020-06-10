@@ -45,13 +45,13 @@ COPY scripts /zap/.ZAP_D/scripts/
 WORKDIR /zap
 # Download and expand the latest stable release 
 RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions.xml | xmlstarlet sel -t -v //url |grep -i Linux | wget -q --content-disposition -i - -O - | tar zx --strip-components=1 && \
-    curl -s -L https://bitbucket.org/meszarv/webswing/downloads/webswing-2.5.10-distribution.zip | jar -x && \
+    curl -s -L https://bitbucket.org/meszarv/webswing/downloads/webswing-2.4-distribution.zip | jar -x && \
     touch AcceptedLicense
-ADD webswing.config /zap/webswing/webswing.config
+ADD webswing.config /zap/webswing-2.4/webswing.config
 
 RUN chown root:root /zap -R && \
-#    chown root:root -R /var/lib/jenkins && \
-#    chmod 777 /var/lib/jenkins -R && \
+    chown root:root -R /var/lib/jenkins && \
+    chmod 777 /var/lib/jenkins -R && \
     chmod 777 /zap -R
 
 #WORKDIR /var/lib/jenkins
