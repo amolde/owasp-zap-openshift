@@ -52,7 +52,7 @@ ADD webswing.config /zap/webswing-2.4/webswing.config
 RUN chown root:root /zap -R && \
     chmod 777 /zap -R
 
-RUN /zap/zap.sh -daemon -dir /zap/.ZAP -addonupdate -addoninstall
+RUN /zap/zap.sh -daemon -dir /zap/.ZAP -addonupdate -addoninstallall
 
 RUN pwd && ls -la
 
