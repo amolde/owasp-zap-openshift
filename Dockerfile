@@ -23,7 +23,7 @@ RUN pip install python-owasp-zap-v2.4
 RUN mkdir -p /zap/wrk && mkdir -p /zap/.ZAP
 ADD zap /zap/
 
-#RUN mkdir -p /var/lib/jenkins/.vnc
+RUN mkdir -p /var/lib/jenkins
 
 # Copy the entrypoint
 # COPY configuration/* /var/lib/jenkins/
@@ -50,6 +50,8 @@ RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersio
 ADD webswing.config /zap/webswing-2.4/webswing.config
 
 RUN chown root:root /zap -R && \
+    chown root:root -R /var/lib/jenkins && \
+    chmod 777 /var/lib/jenkins -R && \
     chmod 777 /zap -R
 
 RUN /zap/zap.sh -dir /zap/.ZAP -addoninstallall -addonupdate -addonlist -cmd -quickurl http://sdkfdsk.sdfmnds.sdf.com
