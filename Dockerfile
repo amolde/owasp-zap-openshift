@@ -26,7 +26,7 @@ ADD zap /zap/
 #RUN mkdir -p /var/lib/jenkins/.vnc
 
 # Copy the entrypoint
-COPY configuration/* /var/lib/jenkins/
+# COPY configuration/* /var/lib/jenkins/
 COPY configuration/run-jnlp-client /usr/local/bin/run-jnlp-client
 
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
@@ -38,9 +38,9 @@ ENV ZAP_PATH /zap/zap.sh
 ENV ZAP_PORT 8080
 
 #COPY policies /var/lib/jenkins/.ZAP/policies/
-COPY policies /zap/.ZAP/policies/
+# COPY policies /zap/.ZAP/policies/
 #COPY .xinitrc /var/lib/jenkins/
-COPY scripts /zap/.ZAP_D/scripts/
+# COPY scripts /zap/.ZAP_D/scripts/
 
 WORKDIR /zap
 # Download and expand the latest stable release 
@@ -50,12 +50,10 @@ RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersio
 ADD webswing.config /zap/webswing-2.4/webswing.config
 
 RUN chown root:root /zap -R && \
-    chown root:root -R /var/lib/jenkins && \
-    chmod 777 /var/lib/jenkins -R && \
     chmod 777 /zap -R
 
-#WORKDIR /var/lib/jenkins
-WORKDIR /zap
+RUN /zap/zap.sh -dir /zap/.ZAP -addonupdate -addoninstall
+
 RUN pwd && ls -la
 
 # Run the Jenkins JNLP client
